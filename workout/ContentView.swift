@@ -15,15 +15,30 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    @State private var text = "";
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                    VStack {
+    
+                        Text("prev: 120")
+                        TextField(text: $text) {
+                            
+                        }.textFieldStyle(.roundedBorder)
+                        Text("prev: 10")
+                        NavigationLink {
+                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        } label: {
+                            Text(item.timestamp!, formatter: itemFormatter)
+                        }
+                        Menu {
+                            
+                        } label: {
+                            Label("Edit", systemImage: "ellipsis").labelStyle(.iconOnly)
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
