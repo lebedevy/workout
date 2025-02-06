@@ -50,8 +50,8 @@ struct Session: View {
 }
 
 struct Set: View {
-    var weight: Int
-    var reps: Int
+    let weight: Int
+    let reps: Int
     
     var body: some View {
         VStack {
@@ -77,7 +77,7 @@ struct SetInput: View {
 }
 
 struct Input : View {
-    var prompt: String;
+    let prompt: String;
     @Binding var value: String
     
     var body: some View {
