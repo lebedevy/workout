@@ -9,14 +9,14 @@ import Foundation
 import CoreData
 
 // Doc ref https://developer.apple.com/documentation/coredata/setting_up_a_core_data_stack
-class Store: ObservableObject {
+struct Store {
     // Singleton
     static let shared = Store()
     
-    var persistanceContainer: NSPersistentContainer
+    let persistanceContainer: NSPersistentContainer
     
-    private init(inMemory: Bool = false) {
-        persistanceContainer = NSPersistentContainer(name: "Model")
+    init(inMemory: Bool = false) {
+        persistanceContainer = NSPersistentContainer(name: "workout")
         
         if inMemory {
             persistanceContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -44,22 +44,23 @@ class Store: ObservableObject {
     }
     
     // Preview; edited from original default Persistance store
-    static var preview: Store = {
+    static let preview: Store = {
         let result = Store(inMemory: true)
         let viewContext = result.persistanceContainer.viewContext
+        
+        for _ in 0..<10 {
+            let newItem = Exercise(context: viewContext)
+            newItem.created_at = Date()
+//                newItem.relationship = NSSet()
+//                for i in 0..<10 {
+//                    let set = Set(context: viewContext)
+//                    set.reps = 1
+//                    set.weight = Double(i) * 10.0
+//                    newItem.relationship?.adding(set)
+//                }
+        }
+        
         do {
-//            for _ in 0..<10 {
-//                let newItem = Routine(context: viewContext)
-//                newItem.created_at = Date()
-////                newItem.relationship = NSSet()
-////                for i in 0..<10 {
-////                    let set = Set(context: viewContext)
-////                    set.reps = 1
-////                    set.weight = Double(i) * 10.0
-////                    newItem.relationship?.adding(set)
-////                }
-//            }
-            
             try viewContext.save()
         } catch {
             // Replace this implementation with code to handle the error appropriately.

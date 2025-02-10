@@ -17,9 +17,9 @@ struct Main: View {
     @Environment(\.managedObjectContext) private var store
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Routine.created_at, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Routine>
+    private var items: FetchedResults<Exercise>
     
     var body: some View {
         VStack {
@@ -27,15 +27,18 @@ struct Main: View {
                 .font(.largeTitle)
                 .padding()
             ScrollView {
-                Exercise()
-                Exercise()
-            }.frame(height: .infinity)
+                ForEach(items) { item in
+                    ExerciseView(exercise: item)
+                }
+            }
             SetInput()
         }
     }
 }
 
-struct Exercise: View {
+struct ExerciseView: View {
+    let exercise: Exercise
+    
     var body: some View {
         HStack {
             VStack {
