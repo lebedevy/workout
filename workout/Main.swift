@@ -39,6 +39,10 @@ struct Main: View {
 struct ExerciseView: View {
     let exercise: Exercise
     
+    var sets: [Set] {
+        exercise.exercise_to_set?.array as? [Set] ?? []
+    }
+    
     var body: some View {
         HStack {
             VStack {
@@ -47,12 +51,9 @@ struct ExerciseView: View {
             }.frame(alignment: .leading)
             ScrollView([.horizontal]) {
                 HStack {
-                    SetView(weight: 120, reps: 12)
-                    SetView(weight: 135, reps: 10)
-                    SetView(weight: 135, reps: 10)
-                    SetView(weight: 135, reps: 10)
-                    SetView(weight: 145, reps: 10)
-                    SetView(weight: 135, reps: 10)
+                    ForEach(sets) { item in
+                        SetView(info: item)
+                    }
                 }
             }.defaultScrollAnchor(.trailing)
         }.padding()
@@ -60,8 +61,10 @@ struct ExerciseView: View {
 }
 
 struct SetView: View {
-    let weight: Int
-    let reps: Int
+    let info: Set
+    
+    var weight: Double { info.weight }
+    var reps: Double { info.reps }
     
     var body: some View {
         VStack {

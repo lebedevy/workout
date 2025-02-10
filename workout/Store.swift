@@ -48,16 +48,17 @@ struct Store {
         let result = Store(inMemory: true)
         let viewContext = result.persistanceContainer.viewContext
         
-        for _ in 0..<10 {
+        for _ in 0..<5 {
             let newItem = Exercise(context: viewContext)
             newItem.created_at = Date()
-//                newItem.relationship = NSSet()
-//                for i in 0..<10 {
-//                    let set = Set(context: viewContext)
-//                    set.reps = 1
-//                    set.weight = Double(i) * 10.0
-//                    newItem.relationship?.adding(set)
-//                }
+            var sets = []
+            for i in 0..<10 {
+                let set = Set(context: viewContext)
+                set.reps = Double(i)
+                set.weight = Double(i) * 10.0
+                sets.append(set)
+            }
+            newItem.exercise_to_set = NSOrderedSet(array: sets)
         }
         
         do {
