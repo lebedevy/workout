@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  Main.swift
 //  workout
 //
 //  Created by Yury Lebedev on 1/19/25.
@@ -9,26 +9,33 @@ import Foundation
 import SwiftUI
 
 // Workout - a collection of sessions
-// Session - a collection of sets
+// Exercise - a collection of sets
 // Set - a collection of reps
 // Rep - a single repetition of an excercise
 
 struct Main: View {
+    @Environment(\.managedObjectContext) private var store
+    
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Routine.created_at, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<Routine>
+    
     var body: some View {
         VStack {
             Text("Workout")
                 .font(.largeTitle)
                 .padding()
             ScrollView {
-                Session()
-                Session()
+                Exercise()
+                Exercise()
             }.frame(height: .infinity)
             SetInput()
         }
     }
 }
 
-struct Session: View {
+struct Exercise: View {
     var body: some View {
         HStack {
             VStack {
@@ -37,19 +44,19 @@ struct Session: View {
             }.frame(alignment: .leading)
             ScrollView([.horizontal]) {
                 HStack {
-                    Set(weight: 120, reps: 12)
-                    Set(weight: 135, reps: 10)
-                    Set(weight: 135, reps: 10)
-                    Set(weight: 135, reps: 10)
-                    Set(weight: 145, reps: 10)
-                    Set(weight: 135, reps: 10)
+                    SetView(weight: 120, reps: 12)
+                    SetView(weight: 135, reps: 10)
+                    SetView(weight: 135, reps: 10)
+                    SetView(weight: 135, reps: 10)
+                    SetView(weight: 145, reps: 10)
+                    SetView(weight: 135, reps: 10)
                 }
             }.defaultScrollAnchor(.trailing)
         }.padding()
     }
 }
 
-struct Set: View {
+struct SetView: View {
     let weight: Int
     let reps: Int
     
@@ -88,5 +95,5 @@ struct Input : View {
 }
 
 #Preview {
-    Main()
+    Main().environment(\.managedObjectContext, Store.preview.persistanceContainer.viewContext)
 }

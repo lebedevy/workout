@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct workoutApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = Store.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            Main()
+                .environment(\.managedObjectContext, persistenceController.persistanceContainer.viewContext)
         }
     }
 }

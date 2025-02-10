@@ -12,9 +12,9 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Routine.created_at, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Routine>
     
     @State private var text = "";
 
@@ -30,9 +30,9 @@ struct ContentView: View {
                         }.textFieldStyle(.roundedBorder)
                         Text("prev: 10")
                         NavigationLink {
-                            Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                            Text("Item at \(item.created_at!, formatter: itemFormatter)")
                         } label: {
-                            Text(item.timestamp!, formatter: itemFormatter)
+                            Text(item.created_at!, formatter: itemFormatter)
                         }
                         Menu {
                             
@@ -59,8 +59,8 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = Routine(context: viewContext)
+            newItem.created_at = Date()
 
             do {
                 try viewContext.save()
@@ -97,5 +97,5 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView().environment(\.managedObjectContext, Store.preview.persistanceContainer.viewContext)
 }
