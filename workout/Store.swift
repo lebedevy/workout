@@ -48,18 +48,7 @@ struct Store {
         let result = Store(inMemory: true)
         let viewContext = result.persistanceContainer.viewContext
         
-        for _ in 0..<5 {
-            let newItem = Exercise(context: viewContext)
-            newItem.created_at = Date()
-            var sets = []
-            for i in 0..<10 {
-                let set = Set(context: viewContext)
-                set.reps = Double(i)
-                set.weight = Double(i) * 10.0
-                sets.append(set)
-            }
-            newItem.exercise_to_set = NSOrderedSet(array: sets)
-        }
+        addTestData(viewContext: viewContext)
         
         do {
             try viewContext.save()
@@ -73,3 +62,39 @@ struct Store {
     }()
 }
 
+func addTestData(viewContext: NSManagedObjectContext) {
+    let arr = ["Bench", "Squat", "Bench", "Curls - supinated"]
+    var types: Dictionary<String, ExerciseType> = [:]
+    
+    for _ in 0..<10 {
+        // Test data where we know the array is not empty
+        let item = arr.randomElement()!
+        
+        // Add or get exericse type
+        let eType: ExerciseType
+        if let val = types[item] {
+            eType = val
+        } else {
+            eType = ExerciseType(context: viewContext)
+            eType.name = item
+            types[item] = eType
+        }
+        
+        // add exercise instance
+        let newItem = Exercise(context: viewContext)
+        newItem.created_at = Date()
+        
+        // add sets
+        var sets: [Set] = []
+        for i in 0..<10 {
+            let set = Set(context: viewContext)
+            set.reps = Double(i)
+            set.weight = Double(i) * 10.0
+            sets.append(set)
+        }
+        
+        // Set relationships
+        newItem.exercise_to_set = NSOrderedSet(array: sets)
+        newItem.exercise_to_type = eType
+    }
+}

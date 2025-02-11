@@ -26,12 +26,12 @@ struct Main: View {
             Text("Workout")
                 .font(.largeTitle)
                 .padding()
-            ScrollView {
-                ForEach(items) { item in
-                    ExerciseView(exercise: item)
+            NavigationStack {
+                List(Array(items)) { item in
+                    NavigationLink(item.exercise_to_type?.name ?? "Exercise", value: item)
+                }.navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
                 }
             }
-            SetInput()
         }
     }
 }
