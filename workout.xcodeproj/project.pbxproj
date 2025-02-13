@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		621FCB302D5993B500AE8E51 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB2F2D5993B500AE8E51 /* Store.swift */; };
 		621FCB332D5A7A9500AE8E51 /* workout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */; };
+		621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */; };
 		62D777712D3DBD4A0021D9C8 /* workoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D777702D3DBD4A0021D9C8 /* workoutApp.swift */; };
 		62D777752D3DBD4C0021D9C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777742D3DBD4C0021D9C8 /* Assets.xcassets */; };
 		62D777782D3DBD4C0021D9C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777772D3DBD4C0021D9C8 /* Preview Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		621FCB2F2D5993B500AE8E51 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		621FCB322D5A7A9500AE8E51 /* workout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = workout.xcdatamodel; sourceTree = "<group>"; };
+		621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
 		62D7776D2D3DBD4A0021D9C8 /* workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D777702D3DBD4A0021D9C8 /* workoutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutApp.swift; sourceTree = "<group>"; };
 		62D777742D3DBD4C0021D9C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				62D777702D3DBD4A0021D9C8 /* workoutApp.swift */,
 				62D777742D3DBD4C0021D9C8 /* Assets.xcassets */,
+				621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */,
 				621FCB2F2D5993B500AE8E51 /* Store.swift */,
 				621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */,
 				62D777762D3DBD4C0021D9C8 /* Preview Content */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */,
 				621FCB302D5993B500AE8E51 /* Store.swift in Sources */,
 				62D777A02D3DCD440021D9C8 /* Main.swift in Sources */,
 				62D777712D3DBD4A0021D9C8 /* workoutApp.swift in Sources */,

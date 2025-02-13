@@ -14,6 +14,8 @@ import SwiftUI
 // Rep - a single repetition of an excercise
 
 struct Main: View {
+    @State private var showAddExerice = false
+    
     @Environment(\.managedObjectContext) private var store
     
     @FetchRequest(
@@ -32,7 +34,16 @@ struct Main: View {
                 }.navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
                 }
             }
+            Button("Add exercise", systemImage: "plus", action: addExercise)
+                .buttonStyle(.borderedProminent)
+                .sheet(isPresented: $showAddExerice, content: {
+                    AddExercise(open: $showAddExerice)
+                })
         }
+    }
+    
+    func addExercise() {
+        showAddExerice.toggle()
     }
 }
 
