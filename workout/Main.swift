@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-// Workout - a collection of sessions
+// Workout - a collection of exercises
 // Exercise - a collection of sets
 // Set - a collection of reps
 // Rep - a single repetition of an excercise
@@ -16,12 +16,10 @@ import SwiftUI
 struct Main: View {
     @State private var showAddExerice = false
     
-    @Environment(\.managedObjectContext) private var store
-    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Exercise>
+    private var workouts: FetchedResults<Workout>
     
     var body: some View {
         VStack {
@@ -29,9 +27,14 @@ struct Main: View {
                 .font(.largeTitle)
                 .padding()
             NavigationStack {
-                List(Array(items)) { item in
-                    NavigationLink(item.exercise_to_type?.name ?? "Exercise", value: item)
-                }.navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
+                List {
+                    ForEach(Array(workouts)) { workout in
+                        Section(header: Text(workout.name ?? "Workout")) {
+                            WorkoutSection(workout: workout)
+                        }
+                    }
+                }
+                .navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
                 }
             }
             Button("Add exercise", systemImage: "plus", action: addExercise)
@@ -44,6 +47,20 @@ struct Main: View {
     
     func addExercise() {
         showAddExerice.toggle()
+    }
+}
+
+struct WorkoutSection: View {
+    let workout: Workout
+    
+    var exercises: [Exercise] {
+        workout.workout_to_exercise?.array as? [Exercise] ?? []
+    }
+    
+    var body: some View {
+        ForEach(exercises) { item in
+            NavigationLink(item.exercise_to_type?.name ?? "Exercise", value: item)
+        }
     }
 }
 
