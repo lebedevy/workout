@@ -11,6 +11,7 @@ import SwiftUI
 struct AddExercise: View {
     @Environment(\.managedObjectContext) private var store
     
+    let workout: Workout
     @Binding var open: Bool
     @State private var search = ""
     
@@ -41,6 +42,7 @@ struct AddExercise: View {
         let exercise = Exercise(context: store)
         exercise.created_at = Date()
         exercise.exercise_to_type = exerciseType
+        exercise.exercise_to_workout = workout
         
         do {
             try store.save()
@@ -68,8 +70,9 @@ struct AddExercise: View {
 #Preview {
     struct Preview: View {
         @State var isOpen = true
+        let workout = Workout()
         var body: some View {
-            AddExercise(open: $isOpen)
+            AddExercise(workout: workout, open: $isOpen)
         }
     }
 

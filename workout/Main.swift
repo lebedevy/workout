@@ -14,10 +14,10 @@ import SwiftUI
 // Rep - a single repetition of an excercise
 
 struct Main: View {
-    @State private var showAddExerice = false
+    @State private var path: [Exercise] = []
     
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
+        sortDescriptors: [ NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
     private var workouts: FetchedResults<Workout>
     
@@ -26,7 +26,7 @@ struct Main: View {
             Text("Workout")
                 .font(.largeTitle)
                 .padding()
-            NavigationStack {
+            NavigationStack(path: $path) {
                 List {
                     ForEach(Array(workouts)) { workout in
                         Section(header: Text(workout.name ?? "Workout")) {
@@ -37,20 +37,12 @@ struct Main: View {
                 .navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
                 }
             }
-            Button("Add exercise", systemImage: "plus", action: addExercise)
-                .buttonStyle(.borderedProminent)
-                .sheet(isPresented: $showAddExerice, content: {
-                    AddExercise(open: $showAddExerice)
-                })
         }
-    }
-    
-    func addExercise() {
-        showAddExerice.toggle()
     }
 }
 
 struct WorkoutSection: View {
+    @State private var showAddExerice = false
     let workout: Workout
     
     var exercises: [Exercise] {
@@ -61,6 +53,15 @@ struct WorkoutSection: View {
         ForEach(exercises) { item in
             NavigationLink(item.exercise_to_type?.name ?? "Exercise", value: item)
         }
+        Button("Add exercise", systemImage: "plus", action: addExercise)
+            .sheet(isPresented: $showAddExerice, content: {
+                AddExercise(workout: workout, open: $showAddExerice)
+            })
+
+    }
+    
+    func addExercise() {
+        showAddExerice.toggle()
     }
 }
 
@@ -72,18 +73,21 @@ struct ExerciseView: View {
     }
     
     var body: some View {
-        HStack {
-            VStack {
-                Text("Weight").padding([.bottom], 0)
-                Text("Reps").padding()
-            }.frame(alignment: .leading)
-            ScrollView([.horizontal]) {
-                HStack {
-                    ForEach(sets) { item in
-                        SetView(info: item)
+        VStack {
+            Text(exercise.exercise_to_type?.name ?? "Exercise")
+            HStack {
+                VStack {
+                    Text("Weight").padding([.bottom], 0)
+                    Text("Reps").padding()
+                }.frame(alignment: .leading)
+                ScrollView([.horizontal]) {
+                    HStack {
+                        ForEach(sets) { item in
+                            SetView(info: item)
+                        }
                     }
-                }
-            }.defaultScrollAnchor(.trailing)
+                }.defaultScrollAnchor(.trailing)
+            }
         }.padding()
     }
 }

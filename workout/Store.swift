@@ -70,7 +70,7 @@ func addTestData(viewContext: NSManagedObjectContext) {
         let workout = Workout(context: viewContext)
         workout.created_at = Date()
         
-        for _ in 0..<10 {
+        for _ in 0..<2 {
             // Test data where we know the array is not empty
             let item = arr.randomElement()!
             
