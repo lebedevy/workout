@@ -14,8 +14,6 @@ import SwiftUI
 // Rep - a single repetition of an excercise
 
 struct Main: View {
-    @State private var path: [Exercise] = []
-    
     @FetchRequest(
         sortDescriptors: [ NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
@@ -26,7 +24,7 @@ struct Main: View {
             Text("Workout")
                 .font(.largeTitle)
                 .padding()
-            NavigationStack(path: $path) {
+            NavigationStack() {
                 List {
                     ForEach(Array(workouts)) { workout in
                         Section(header: Text(workout.name ?? "Workout")) {
