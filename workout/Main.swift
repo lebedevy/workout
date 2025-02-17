@@ -15,7 +15,7 @@ import SwiftUI
 
 struct Main: View {
     @FetchRequest(
-        sortDescriptors: [ NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
     private var workouts: FetchedResults<Workout>
     
@@ -41,7 +41,7 @@ struct Main: View {
 
 struct WorkoutSection: View {
     @State private var showAddExerice = false
-    let workout: Workout
+    @ObservedObject var workout: Workout
     
     var exercises: [Exercise] {
         workout.workout_to_exercise?.array as? [Exercise] ?? []
