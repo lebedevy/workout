@@ -10,6 +10,7 @@ import CoreData
 import SwiftUI
 
 struct ExerciseView: View {
+    @Environment(\.managedObjectContext) private var store
     @ObservedObject var exercise: Exercise
     
     var sets: [Set] {
@@ -18,7 +19,6 @@ struct ExerciseView: View {
     
     var body: some View {
         VStack {
-            Text(exercise.exercise_to_type?.name ?? "Exercise")
             HStack {
                 VStack {
                     Text("Weight").padding([.bottom], 0)
@@ -32,7 +32,28 @@ struct ExerciseView: View {
                     }
                 }.defaultScrollAnchor(.trailing)
             }
-        }.padding()
+            SetInput(add: addSet)
+        }
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        .padding()
+            .navigationTitle(exercise.exercise_to_type?.name ?? "Exercise")
+    }
+    
+    func addSet(weight: Double, reps: Double) {
+        let newSet = Set(context: store)
+        newSet.created_at = Date()
+        newSet.weight = weight
+        newSet.reps = reps
+        newSet.set_to_exercise = exercise
+        
+        do {
+            try store.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
 }
 
@@ -51,6 +72,7 @@ struct SetView: View {
 }
 
 struct SetInput: View {
+    let add: (Double, Double) -> Void
     @State var weight = ""
     @State var reps = ""
     
@@ -59,7 +81,9 @@ struct SetInput: View {
             Input(prompt: "Weight", value: $weight)
             Input(prompt: "Reps", value: $reps)
             Button("Add") {
-                
+                add(Double(weight) ?? 0, Double(reps) ?? 0)
+                weight = ""
+                reps = ""
             }.buttonStyle(.borderedProminent)
         }.padding()
     }
@@ -77,7 +101,7 @@ struct Input : View {
 }
 
 #Preview {
-    struct Preview: View {        
+    struct Preview: View {
         @FetchRequest(
             sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
             animation: .default)
