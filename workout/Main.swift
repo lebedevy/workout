@@ -20,20 +20,15 @@ struct Main: View {
     private var workouts: FetchedResults<Workout>
     
     var body: some View {
-        VStack {
-            Text("Workout")
-                .font(.largeTitle)
-                .padding()
-            NavigationStack() {
-                List {
-                    ForEach(Array(workouts)) { workout in
-                        Section(header: Text(workout.name ?? "Workout")) {
-                            WorkoutSection(workout: workout)
-                        }
+        NavigationStack() {
+            List {
+                ForEach(Array(workouts)) { workout in
+                    Section(header: Text(workout.name ?? "Workout")) {
+                        WorkoutSection(workout: workout)
                     }
                 }
-                .navigationDestination(for: Exercise.self) { exercise in ExerciseView(exercise: exercise)
-                }
+            }
+            .navigationDestination(for: Exercise.self) { exercise in ExercisePage(selected: exercise.objectID)
             }
         }
     }

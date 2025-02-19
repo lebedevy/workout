@@ -9,34 +9,34 @@ import Foundation
 import CoreData
 import SwiftUI
 
-struct ExerciseView: View {
+struct ExercisePage: View {
     @Environment(\.managedObjectContext) private var store
-    @ObservedObject var exercise: Exercise
     
-    var sets: [Set] {
-        exercise.exercise_to_set?.array as? [Set] ?? []
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: false)],
+        animation: .default)
+    private var exercises: FetchedResults<Exercise>
+    
+    let selected: NSManagedObjectID
+    
+    var exercise: Exercise? {
+        exercises.first(where: {i in i.objectID == selected})
     }
     
     var body: some View {
         VStack {
-            HStack {
-                VStack {
-                    Text("Weight").padding([.bottom], 0)
-                    Text("Reps").padding()
-                }.frame(alignment: .leading)
-                ScrollView([.horizontal]) {
-                    HStack {
-                        ForEach(sets) { item in
-                            SetView(info: item)
-                        }
-                    }
-                }.defaultScrollAnchor(.trailing)
-            }
+            ScrollView {
+                ForEach(Array(exercises)) { ex in
+                    ExerciseView(exercise: ex)
+                        .padding()
+                        .overlay(ex.objectID == selected ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
+                }
+            }.defaultScrollAnchor(.bottom)
             SetInput(add: addSet)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding()
-            .navigationTitle(exercise.exercise_to_type?.name ?? "Exercise")
+            .navigationTitle(exercise?.exercise_to_type?.name ?? "Exercise")
     }
     
     func addSet(weight: Double, reps: Double) {
@@ -53,6 +53,30 @@ struct ExerciseView: View {
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+}
+
+struct ExerciseView: View {
+    @ObservedObject var exercise: Exercise
+    
+    var sets: [Set] {
+        exercise.exercise_to_set?.array as? [Set] ?? []
+    }
+    
+    var body: some View {
+        HStack {
+            VStack {
+                Text("Weight").padding([.bottom], 0)
+                Text("Reps").padding()
+            }.frame(alignment: .leading)
+            ScrollView([.horizontal]) {
+                HStack {
+                    ForEach(sets) { item in
+                        SetView(info: item)
+                    }
+                }
+            }.defaultScrollAnchor(.trailing)
         }
     }
 }
@@ -108,7 +132,7 @@ struct Input : View {
         private var exercises: FetchedResults<Exercise>
         
         var body: some View {
-            ExerciseView(exercise: exercises.first!)
+            ExercisePage(selected: exercises.first!.objectID)
         }
     }
     
