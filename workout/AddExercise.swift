@@ -23,15 +23,27 @@ struct AddExercise: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List(filterExercises(exercises: Array(items), searchText: search)) { item in
-                    Text(item.name ?? "Exercise")
-                        .onTapGesture {
-                            addExercise(exerciseType: item)
+                TextField("Search or add exercise", text: $search)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .padding()
+                    )
+                Section {
+                    List(filterExercises(exercises: Array(items), searchText: search)) { item in
+                        Text(item.name ?? "Exercise")
+                            .onTapGesture {
+                                addExercise(exerciseType: item)
+                            }
+                        if !search.isEmpty {
+                            Button(search) {}
                         }
+                    }
                 }
                 Button("Cancel", action: cancel)
             }
-        }.searchable(text: $search, prompt: "Search or add exercise")
+        }
     }
     
     func cancel() {
@@ -70,9 +82,12 @@ struct AddExercise: View {
 #Preview {
     struct Preview: View {
         @State var isOpen = true
-        let workout = Workout()
+        @FetchRequest(
+            sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
+            animation: .default)
+        private var workouts: FetchedResults<Workout>
         var body: some View {
-            AddExercise(workout: workout, open: $isOpen)
+            AddExercise(workout: workouts.first!, open: $isOpen)
         }
     }
 
