@@ -19,6 +19,10 @@ struct ExercisePage: View {
     
     let selected: NSManagedObjectID
     
+    var items: [Exercise] {
+        exercises.filter { $0.objectID != selected }
+    }
+    
     var exercise: Exercise? {
         exercises.first(where: {i in i.objectID == selected})
     }
@@ -26,17 +30,28 @@ struct ExercisePage: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(Array(exercises)) { ex in
+                ForEach(items) { ex in
                     ExerciseView(exercise: ex)
                         .padding()
                         .overlay(ex.objectID == selected ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
                 }
             }.defaultScrollAnchor(.bottom)
+            if let exercise {
+                Divider()
+                Text("Current exercise")
+                ExerciseView(exercise: exercise)
+                    .padding()
+            }
             SetInput(add: addSet)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding()
             .navigationTitle(exercise?.exercise_to_type?.name ?? "Exercise")
+            .onChange(of: exercise, initial: true, { _, value in
+                let predicate = NSPredicate(format: "exercise_to_type.name == %@", value?.exercise_to_type?.name ?? "")
+                
+                exercises.nsPredicate = predicate
+            })
     }
     
     func addSet(weight: Double, reps: Double) {
