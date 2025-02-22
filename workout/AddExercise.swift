@@ -26,18 +26,23 @@ struct AddExercise: View {
                 TextField("Search or add exercise", text: $search)
                     .textFieldStyle(.roundedBorder)
                     .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .padding()
-                    )
                 Section {
-                    List(filterExercises(exercises: Array(items), searchText: search)) { item in
-                        Text(item.name ?? "Exercise")
-                            .onTapGesture {
-                                addExercise(exerciseType: item)
+                    List {
+                        ForEach(filterExercises(exercises: Array(items), searchText: search)) { item in
+                            Text(item.name ?? "Exercise")
+                                .onTapGesture {
+                                    addExercise(exerciseType: item)
+                                }
+                        }
+                        if search.isEmpty {
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("Start typing to add a new exercise")
+                            }.foregroundColor(.gray)
+                        } else {
+                            Button(search, systemImage: "plus") {
+                                createExercise(name: search)
                             }
-                        if !search.isEmpty {
-                            Button(search) {}
                         }
                     }
                 }
@@ -50,11 +55,11 @@ struct AddExercise: View {
         open.toggle()
     }
     
-    func addExercise(exerciseType: ExerciseType) {
-        let exercise = Exercise(context: store)
-        exercise.created_at = Date()
-        exercise.exercise_to_type = exerciseType
-        exercise.exercise_to_workout = workout
+    func createExercise(name: String) {
+        let exerciseType = ExerciseType(context: store)
+        exerciseType.name = name
+        
+        generateExerciseObj(exerciseType: exerciseType)
         
         do {
             try store.save()
@@ -65,6 +70,27 @@ struct AddExercise: View {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
+    }
+    
+    func addExercise(exerciseType: ExerciseType) {
+        generateExerciseObj(exerciseType: exerciseType)
+        
+        do {
+            try store.save()
+            open.toggle()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func generateExerciseObj(exerciseType: ExerciseType) {
+        let exercise = Exercise(context: store)
+        exercise.created_at = Date()
+        exercise.exercise_to_type = exerciseType
+        exercise.exercise_to_workout = workout
     }
     
     func filterExercises(
