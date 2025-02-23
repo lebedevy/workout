@@ -14,7 +14,7 @@ import SwiftUI
 // Rep - a single repetition of an excercise
 
 struct Main: View {
-    @FetchRequest(
+    @FetchRequest(entity: Workout.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
     private var workouts: FetchedResults<Workout>

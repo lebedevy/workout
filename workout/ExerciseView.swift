@@ -12,9 +12,9 @@ import SwiftUI
 struct ExercisePage: View {
     @Environment(\.managedObjectContext) private var store
     
-    @FetchRequest(
+    @FetchRequest(entity: Exercise.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: false)],
-        animation: .default)
+        predicate: NSPredicate(value: false), animation: .default)
     private var exercises: FetchedResults<Exercise>
     
     let selected: NSManagedObjectID
@@ -33,7 +33,6 @@ struct ExercisePage: View {
                 ForEach(items) { ex in
                     ExerciseView(exercise: ex)
                         .padding()
-                        .overlay(ex.objectID == selected ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
                 }
             }.defaultScrollAnchor(.bottom)
             if let exercise {
@@ -141,12 +140,13 @@ struct Input : View {
 
 #Preview {
     struct Preview: View {
-        @FetchRequest(
+        @FetchRequest(entity: Exercise.entity(),
             sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
             animation: .default)
         private var exercises: FetchedResults<Exercise>
         
         var body: some View {
+            // This preview will crash when there are zero exercises
             ExercisePage(selected: exercises.first!.objectID)
         }
     }

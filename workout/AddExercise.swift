@@ -15,7 +15,7 @@ struct AddExercise: View {
     @Binding var open: Bool
     @State private var search = ""
     
-    @FetchRequest(
+    @FetchRequest(entity: ExerciseType.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \ExerciseType.name, ascending: true)],
         animation: .default)
     private var items: FetchedResults<ExerciseType>
@@ -108,11 +108,12 @@ struct AddExercise: View {
 #Preview {
     struct Preview: View {
         @State var isOpen = true
-        @FetchRequest(
+        @FetchRequest(entity: Workout.entity(),
             sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
             animation: .default)
         private var workouts: FetchedResults<Workout>
         var body: some View {
+            // This preview crash without a workout
             AddExercise(workout: workouts.first!, open: $isOpen)
         }
     }
