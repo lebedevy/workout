@@ -12,19 +12,18 @@ import SwiftUI
 struct ExercisePage: View {
     @Environment(\.managedObjectContext) private var store
     
-    @FetchRequest(entity: Exercise.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: false)],
-        predicate: NSPredicate(value: false), animation: .default)
-    private var exercises: FetchedResults<Exercise>
+    @ObservedObject var exercise: Exercise
     
-    let selected: NSManagedObjectID
-    
-    var items: [Exercise] {
-        exercises.filter { $0.objectID != selected }
+    init(exercise: Exercise) {
+        self.exercise = exercise
+        _exercises = FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: false)], predicate: ExercisePage.getPredicate(exercise: exercise), animation: .default)
     }
     
-    var exercise: Exercise? {
-        exercises.first(where: {i in i.objectID == selected})
+    @FetchRequest
+    private var exercises: FetchedResults<Exercise>
+    
+    var items: [Exercise] {
+        exercises.filter { $0.objectID != exercise.objectID }
     }
     
     var body: some View {
@@ -35,25 +34,25 @@ struct ExercisePage: View {
                         .padding()
                 }
             }.defaultScrollAnchor(.bottom)
-            if let exercise {
-                Divider()
-                Text("Current exercise")
-                ExerciseView(exercise: exercise)
-                    .padding()
-            }
+            Divider()
+            Text("Current exercise")
+            ExerciseView(exercise: exercise)
+                .padding()
             SetInput(add: addSet)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding()
-            .navigationTitle(exercise?.exercise_to_type?.name ?? "Exercise")
-            .onChange(of: exercise, initial: true, { _, value in
-                let predicate = NSPredicate(format: "exercise_to_type.name == %@", value?.exercise_to_type?.name ?? "")
-                
-                exercises.nsPredicate = predicate
+            .navigationTitle(exercise.exercise_to_type?.name ?? "Exercise")
+            .onChange(of: exercise, initial: true, { _, value in                
+                exercises.nsPredicate = ExercisePage.getPredicate(exercise: value)
             })
     }
     
-    func addSet(weight: Double, reps: Double) {
+    private static func getPredicate(exercise: Exercise) -> NSPredicate {
+        return NSPredicate(format: "exercise_to_type.name == %@", exercise.exercise_to_type?.name ?? "")
+    }
+    
+    private func addSet(weight: Double, reps: Double) {
         let newSet = Set(context: store)
         newSet.created_at = Date()
         newSet.weight = weight
@@ -140,14 +139,13 @@ struct Input : View {
 
 #Preview {
     struct Preview: View {
-        @FetchRequest(entity: Exercise.entity(),
-            sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
+        @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
             animation: .default)
         private var exercises: FetchedResults<Exercise>
         
         var body: some View {
             // This preview will crash when there are zero exercises
-            ExercisePage(selected: exercises.first!.objectID)
+            ExercisePage(exercise: exercises.first!)
         }
     }
     

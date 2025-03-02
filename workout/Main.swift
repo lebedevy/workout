@@ -30,7 +30,7 @@ struct Main: View {
                         }
                     }
                 }
-                .navigationDestination(for: Exercise.self) { exercise in ExercisePage(selected: exercise.objectID)
+                .navigationDestination(for: Exercise.self) { exercise in ExercisePage(exercise: exercise)
                 }
                 Button("workout", systemImage: "plus") {
                     addWorkout()
