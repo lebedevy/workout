@@ -14,22 +14,48 @@ import SwiftUI
 // Rep - a single repetition of an excercise
 
 struct Main: View {
-    @FetchRequest(entity: Workout.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
+    @Environment(\.managedObjectContext) private var store
+
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Workout.created_at, ascending: true)],
         animation: .default)
     private var workouts: FetchedResults<Workout>
     
     var body: some View {
         NavigationStack() {
-            List {
-                ForEach(Array(workouts)) { workout in
-                    Section(header: Text(workout.name ?? "Workout")) {
-                        WorkoutSection(workout: workout)
+            ZStack(alignment: .bottomTrailing) {
+                List {
+                    ForEach(Array(workouts)) { workout in
+                        Section(header: Text(workout.name ?? "Workout")) {
+                            WorkoutSection(workout: workout)
+                        }
                     }
                 }
+                .navigationDestination(for: Exercise.self) { exercise in ExercisePage(selected: exercise.objectID)
+                }
+                Button("workout", systemImage: "plus") {
+                    addWorkout()
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
             }
-            .navigationDestination(for: Exercise.self) { exercise in ExercisePage(selected: exercise.objectID)
-            }
+        }
+    }
+    
+    private func addWorkout() {
+        let workout = Workout(context: store)
+        let formatter = DateFormatter()
+        let created = Date()
+        formatter.dateStyle = .short
+        workout.created_at = created
+        workout.name = formatter.string(from: created)
+        
+        do {
+            try store.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 }

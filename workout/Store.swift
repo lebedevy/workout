@@ -66,7 +66,13 @@ func addTestData(viewContext: NSManagedObjectContext) {
     let arr = ["Bench", "Squat", "Bench", "Curls - supinated"]
     var types: Dictionary<String, ExerciseType> = [:]
     
-    for _ in 0..<5 {
+    /*
+     Development note for empty results
+     Currently, any @fetchrequests will break when they face an empty result when you use an in memory store
+     If you want to preview UI with an empty result set, you will have to add an entity arg as the first argument for fetchrequest (ex entity: Workout.entity())
+     This will prevent application crashes, BUT it will now break proper updates to the fetchedresults when new entities are added
+     */
+    for _ in 0..<1 {
         let workout = Workout(context: viewContext)
         workout.created_at = Date()
         

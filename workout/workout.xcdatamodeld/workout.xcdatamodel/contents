@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="Exercise" representedClassName="Exercise" syncable="YES" codeGenerationType="class">
-        <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="created_at" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="exercise_to_set" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Set" inverseName="set_to_exercise" inverseEntity="Set"/>
         <relationship name="exercise_to_type" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseType" inverseName="type_to_exercise" inverseEntity="ExerciseType"/>
         <relationship name="exercise_to_workout" maxCount="1" deletionRule="Nullify" destinationEntity="Workout" inverseName="workout_to_exercise" inverseEntity="Workout"/>
     </entity>
     <entity name="ExerciseType" representedClassName="ExerciseType" syncable="YES" codeGenerationType="class">
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
         <relationship name="type_to_exercise" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Exercise" inverseName="exercise_to_type" inverseEntity="Exercise"/>
     </entity>
     <entity name="Set" representedClassName="Set" syncable="YES" codeGenerationType="class">
