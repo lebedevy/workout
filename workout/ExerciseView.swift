@@ -26,12 +26,21 @@ struct ExercisePage: View {
         exercises.filter { $0.objectID != exercise.objectID }
     }
     
+    var formatter: DateFormatter {
+        getFormatter()
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
                 ForEach(items) { ex in
-                    ExerciseView(exercise: ex)
-                        .padding()
+                    VStack {
+                        if let date = ex.created_at {
+                            Text(formatter.string(from: date))
+                        }
+                        ExerciseView(exercise: ex)
+                            .padding()
+                    }
                 }
             }.defaultScrollAnchor(.bottom)
             Divider()

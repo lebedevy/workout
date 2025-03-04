@@ -11,6 +11,7 @@
 		621FCB332D5A7A9500AE8E51 /* workout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */; };
 		621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */; };
 		621FCB372D65549100AE8E51 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB362D65549100AE8E51 /* ExerciseView.swift */; };
+		62720AE92D768D9400504F87 /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62720AE82D768D9400504F87 /* util.swift */; };
 		62D777712D3DBD4A0021D9C8 /* workoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D777702D3DBD4A0021D9C8 /* workoutApp.swift */; };
 		62D777752D3DBD4C0021D9C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777742D3DBD4C0021D9C8 /* Assets.xcassets */; };
 		62D777782D3DBD4C0021D9C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777772D3DBD4C0021D9C8 /* Preview Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		621FCB322D5A7A9500AE8E51 /* workout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = workout.xcdatamodel; sourceTree = "<group>"; };
 		621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
 		621FCB362D65549100AE8E51 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		62720AE82D768D9400504F87 /* util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
 		62D7776D2D3DBD4A0021D9C8 /* workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D777702D3DBD4A0021D9C8 /* workoutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutApp.swift; sourceTree = "<group>"; };
 		62D777742D3DBD4C0021D9C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				62D777702D3DBD4A0021D9C8 /* workoutApp.swift */,
 				62D777742D3DBD4C0021D9C8 /* Assets.xcassets */,
+				62720AE82D768D9400504F87 /* util.swift */,
 				621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */,
 				621FCB2F2D5993B500AE8E51 /* Store.swift */,
 				621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */,
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62720AE92D768D9400504F87 /* util.swift in Sources */,
 				621FCB372D65549100AE8E51 /* ExerciseView.swift in Sources */,
 				621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */,
 				621FCB302D5993B500AE8E51 /* Store.swift in Sources */,
@@ -363,6 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -420,6 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -435,12 +441,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"workout/Preview Content\"";
 				DEVELOPMENT_TEAM = XHNSS32569;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Big Arms App - A Unique App to Track Your Workout Progress";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,8 +460,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = yury.workout;
+				PRODUCT_BUNDLE_IDENTIFIER = lebedevy.workout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -464,12 +474,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"workout/Preview Content\"";
 				DEVELOPMENT_TEAM = XHNSS32569;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Big Arms App - A Unique App to Track Your Workout Progress";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -480,8 +493,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = yury.workout;
+				PRODUCT_BUNDLE_IDENTIFIER = lebedevy.workout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

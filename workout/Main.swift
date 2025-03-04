@@ -43,9 +43,8 @@ struct Main: View {
     
     private func addWorkout() {
         let workout = Workout(context: store)
-        let formatter = DateFormatter()
+        let formatter = getFormatter()
         let created = Date()
-        formatter.dateStyle = .short
         workout.created_at = created
         workout.name = formatter.string(from: created)
         
