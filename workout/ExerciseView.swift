@@ -44,7 +44,20 @@ struct ExercisePage: View {
                 }
             }.defaultScrollAnchor(.bottom)
             Divider()
-            Text("Current exercise")
+            ZStack(alignment: .trailing) {
+                Text("Current exercise")
+                    .frame(maxWidth: .infinity)
+                Menu(content: {
+                    Button(action: {}, label: {
+                        Label("Add tag", systemImage: "tag")
+                    })
+                    Button(action: {}, label: {
+                        Label("Add notes", systemImage: "note")
+                    })
+                }, label: {
+                    Image(systemName: "ellipsis")
+                })
+            }
             ExerciseView(exercise: exercise)
                 .padding()
             SetInput(add: addSet)
