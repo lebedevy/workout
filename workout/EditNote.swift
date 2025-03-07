@@ -22,19 +22,32 @@ struct EditNote: View {
     @State private var text: String
     
     var body: some View {
-        Text(exercise.notes ?? "")
-        TextField("Add exercise notes", text: $text)
+        VStack {
+            TextField("Exercise notes", text: $text)
+                .frame(maxHeight: .infinity)
+                .padding()
+                .border(.secondary)
+                .multilineTextAlignment(.center)
+            HStack {
+                Button("Cancel", action: cancel)
+                Spacer()
+                Button("Save", action: save)
+                    .buttonStyle(.borderedProminent)
+            }
+        }
+        .padding()
     }
     
-    private func addSet(weight: Double, reps: Double) {
-        let newSet = Set(context: store)
-        newSet.created_at = Date()
-        newSet.weight = weight
-        newSet.reps = reps
-        newSet.set_to_exercise = exercise
+    private func cancel() {
+        open.toggle()
+    }
+    
+    private func save() {
+        exercise.notes = text
         
         do {
             try store.save()
+            open.toggle()
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
