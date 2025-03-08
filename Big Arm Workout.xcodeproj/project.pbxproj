@@ -10,8 +10,10 @@
 		621FCB302D5993B500AE8E51 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB2F2D5993B500AE8E51 /* Store.swift */; };
 		621FCB332D5A7A9500AE8E51 /* workout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */; };
 		621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */; };
-		621FCB372D65549100AE8E51 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB362D65549100AE8E51 /* ExerciseView.swift */; };
+		621FCB372D65549100AE8E51 /* ExercisePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 621FCB362D65549100AE8E51 /* ExercisePage.swift */; };
 		62720AE92D768D9400504F87 /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62720AE82D768D9400504F87 /* util.swift */; };
+		62B5F0612D78AFFC00B8DB3D /* EditNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B5F0602D78AFFA00B8DB3D /* EditNote.swift */; };
+		62B5F0642D7948AE00B8DB3D /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B5F0632D7948AD00B8DB3D /* ExerciseView.swift */; };
 		62D777712D3DBD4A0021D9C8 /* workoutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D777702D3DBD4A0021D9C8 /* workoutApp.swift */; };
 		62D777752D3DBD4C0021D9C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777742D3DBD4C0021D9C8 /* Assets.xcassets */; };
 		62D777782D3DBD4C0021D9C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62D777772D3DBD4C0021D9C8 /* Preview Assets.xcassets */; };
@@ -42,15 +44,17 @@
 		621FCB2F2D5993B500AE8E51 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		621FCB322D5A7A9500AE8E51 /* workout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = workout.xcdatamodel; sourceTree = "<group>"; };
 		621FCB342D5D8F3E00AE8E51 /* AddExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExercise.swift; sourceTree = "<group>"; };
-		621FCB362D65549100AE8E51 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		621FCB362D65549100AE8E51 /* ExercisePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePage.swift; sourceTree = "<group>"; };
 		62720AE82D768D9400504F87 /* util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
-		62D7776D2D3DBD4A0021D9C8 /* workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		62B5F0602D78AFFA00B8DB3D /* EditNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNote.swift; sourceTree = "<group>"; };
+		62B5F0632D7948AD00B8DB3D /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		62D7776D2D3DBD4A0021D9C8 /* Big Arm Workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Big Arm Workout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D777702D3DBD4A0021D9C8 /* workoutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutApp.swift; sourceTree = "<group>"; };
 		62D777742D3DBD4C0021D9C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62D777772D3DBD4C0021D9C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		62D777822D3DBD4C0021D9C8 /* workoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = workoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		62D777822D3DBD4C0021D9C8 /* Big Arm WorkoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Big Arm WorkoutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D777862D3DBD4C0021D9C8 /* workoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutTests.swift; sourceTree = "<group>"; };
-		62D7778C2D3DBD4C0021D9C8 /* workoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = workoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		62D7778C2D3DBD4C0021D9C8 /* Big Arm WorkoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Big Arm WorkoutUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62D777902D3DBD4C0021D9C8 /* workoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutUITests.swift; sourceTree = "<group>"; };
 		62D777922D3DBD4C0021D9C8 /* workoutUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workoutUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		62D7779F2D3DCD440021D9C8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
@@ -94,9 +98,9 @@
 		62D7776E2D3DBD4A0021D9C8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				62D7776D2D3DBD4A0021D9C8 /* workout.app */,
-				62D777822D3DBD4C0021D9C8 /* workoutTests.xctest */,
-				62D7778C2D3DBD4C0021D9C8 /* workoutUITests.xctest */,
+				62D7776D2D3DBD4A0021D9C8 /* Big Arm Workout.app */,
+				62D777822D3DBD4C0021D9C8 /* Big Arm WorkoutTests.xctest */,
+				62D7778C2D3DBD4C0021D9C8 /* Big Arm WorkoutUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,7 +116,9 @@
 				621FCB312D5A7A9500AE8E51 /* workout.xcdatamodeld */,
 				62D777762D3DBD4C0021D9C8 /* Preview Content */,
 				62D7779F2D3DCD440021D9C8 /* Main.swift */,
-				621FCB362D65549100AE8E51 /* ExerciseView.swift */,
+				621FCB362D65549100AE8E51 /* ExercisePage.swift */,
+				62B5F0602D78AFFA00B8DB3D /* EditNote.swift */,
+				62B5F0632D7948AD00B8DB3D /* ExerciseView.swift */,
 			);
 			path = workout;
 			sourceTree = "<group>";
@@ -145,9 +151,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		62D7776C2D3DBD4A0021D9C8 /* workout */ = {
+		62D7776C2D3DBD4A0021D9C8 /* Big Arm Workout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62D777962D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workout" */;
+			buildConfigurationList = 62D777962D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm Workout" */;
 			buildPhases = (
 				62D777692D3DBD4A0021D9C8 /* Sources */,
 				62D7776A2D3DBD4A0021D9C8 /* Frameworks */,
@@ -157,14 +163,14 @@
 			);
 			dependencies = (
 			);
-			name = workout;
+			name = "Big Arm Workout";
 			productName = workout;
-			productReference = 62D7776D2D3DBD4A0021D9C8 /* workout.app */;
+			productReference = 62D7776D2D3DBD4A0021D9C8 /* Big Arm Workout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		62D777812D3DBD4C0021D9C8 /* workoutTests */ = {
+		62D777812D3DBD4C0021D9C8 /* Big Arm WorkoutTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62D777992D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workoutTests" */;
+			buildConfigurationList = 62D777992D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm WorkoutTests" */;
 			buildPhases = (
 				62D7777E2D3DBD4C0021D9C8 /* Sources */,
 				62D7777F2D3DBD4C0021D9C8 /* Frameworks */,
@@ -175,14 +181,14 @@
 			dependencies = (
 				62D777842D3DBD4C0021D9C8 /* PBXTargetDependency */,
 			);
-			name = workoutTests;
+			name = "Big Arm WorkoutTests";
 			productName = workoutTests;
-			productReference = 62D777822D3DBD4C0021D9C8 /* workoutTests.xctest */;
+			productReference = 62D777822D3DBD4C0021D9C8 /* Big Arm WorkoutTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		62D7778B2D3DBD4C0021D9C8 /* workoutUITests */ = {
+		62D7778B2D3DBD4C0021D9C8 /* Big Arm WorkoutUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 62D7779C2D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workoutUITests" */;
+			buildConfigurationList = 62D7779C2D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm WorkoutUITests" */;
 			buildPhases = (
 				62D777882D3DBD4C0021D9C8 /* Sources */,
 				62D777892D3DBD4C0021D9C8 /* Frameworks */,
@@ -193,9 +199,9 @@
 			dependencies = (
 				62D7778E2D3DBD4C0021D9C8 /* PBXTargetDependency */,
 			);
-			name = workoutUITests;
+			name = "Big Arm WorkoutUITests";
 			productName = workoutUITests;
-			productReference = 62D7778C2D3DBD4C0021D9C8 /* workoutUITests.xctest */;
+			productReference = 62D7778C2D3DBD4C0021D9C8 /* Big Arm WorkoutUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -221,7 +227,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 62D777682D3DBD4A0021D9C8 /* Build configuration list for PBXProject "workout" */;
+			buildConfigurationList = 62D777682D3DBD4A0021D9C8 /* Build configuration list for PBXProject "Big Arm Workout" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -234,9 +240,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				62D7776C2D3DBD4A0021D9C8 /* workout */,
-				62D777812D3DBD4C0021D9C8 /* workoutTests */,
-				62D7778B2D3DBD4C0021D9C8 /* workoutUITests */,
+				62D7776C2D3DBD4A0021D9C8 /* Big Arm Workout */,
+				62D777812D3DBD4C0021D9C8 /* Big Arm WorkoutTests */,
+				62D7778B2D3DBD4C0021D9C8 /* Big Arm WorkoutUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -273,10 +279,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				62720AE92D768D9400504F87 /* util.swift in Sources */,
-				621FCB372D65549100AE8E51 /* ExerciseView.swift in Sources */,
+				621FCB372D65549100AE8E51 /* ExercisePage.swift in Sources */,
 				621FCB352D5D8F3E00AE8E51 /* AddExercise.swift in Sources */,
+				62B5F0642D7948AE00B8DB3D /* ExerciseView.swift in Sources */,
 				621FCB302D5993B500AE8E51 /* Store.swift in Sources */,
 				62D777A02D3DCD440021D9C8 /* Main.swift in Sources */,
+				62B5F0612D78AFFC00B8DB3D /* EditNote.swift in Sources */,
 				62D777712D3DBD4A0021D9C8 /* workoutApp.swift in Sources */,
 				621FCB332D5A7A9500AE8E51 /* workout.xcdatamodeld in Sources */,
 			);
@@ -304,12 +312,12 @@
 /* Begin PBXTargetDependency section */
 		62D777842D3DBD4C0021D9C8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 62D7776C2D3DBD4A0021D9C8 /* workout */;
+			target = 62D7776C2D3DBD4A0021D9C8 /* Big Arm Workout */;
 			targetProxy = 62D777832D3DBD4C0021D9C8 /* PBXContainerItemProxy */;
 		};
 		62D7778E2D3DBD4C0021D9C8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 62D7776C2D3DBD4A0021D9C8 /* workout */;
+			target = 62D7776C2D3DBD4A0021D9C8 /* Big Arm Workout */;
 			targetProxy = 62D7778D2D3DBD4C0021D9C8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -518,7 +526,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/workout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/workout";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Big Arm Workout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Big Arm Workout";
 			};
 			name = Debug;
 		};
@@ -538,7 +546,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/workout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/workout";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Big Arm Workout.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Big Arm Workout";
 			};
 			name = Release;
 		};
@@ -581,7 +589,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		62D777682D3DBD4A0021D9C8 /* Build configuration list for PBXProject "workout" */ = {
+		62D777682D3DBD4A0021D9C8 /* Build configuration list for PBXProject "Big Arm Workout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62D777942D3DBD4C0021D9C8 /* Debug */,
@@ -590,7 +598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62D777962D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workout" */ = {
+		62D777962D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm Workout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62D777972D3DBD4C0021D9C8 /* Debug */,
@@ -599,7 +607,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62D777992D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workoutTests" */ = {
+		62D777992D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm WorkoutTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62D7779A2D3DBD4C0021D9C8 /* Debug */,
@@ -608,7 +616,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		62D7779C2D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "workoutUITests" */ = {
+		62D7779C2D3DBD4C0021D9C8 /* Build configuration list for PBXNativeTarget "Big Arm WorkoutUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				62D7779D2D3DBD4C0021D9C8 /* Debug */,
