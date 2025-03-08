@@ -10,8 +10,12 @@ import SwiftUI
 struct ExerciseView: View {
     @ObservedObject var exercise: Exercise
     
-    var sets: [Set] {
-        exercise.exercise_to_set?.array as? [Set] ?? []
+    var sets: [SetPage] {
+        let arr = exercise.exercise_to_set?.array as? [Set] ?? []
+        let step = 4
+        return stride(from: 0, to: arr.count, by: step).map {
+            SetPage(sets: Array(arr[$0..<min($0 + step, arr.count)]))
+        }
     }
     
     var body: some View {
@@ -21,13 +25,17 @@ struct ExerciseView: View {
                     Text("Weight").padding([.bottom], 0)
                     Text("Reps").padding()
                 }.frame(alignment: .leading)
-                ScrollView([.horizontal]) {
-                    HStack {
-                        ForEach(sets) { item in
-                            SetView(info: item)
+                TabView {
+                    ForEach(sets) { page in
+                        HStack {
+                            ForEach(page.sets) { item in
+                                SetView(info: item)
+                            }
                         }
                     }
-                }.defaultScrollAnchor(.trailing)
+                }
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: sets.count > 1 ? .always : .never))
             }
             // TODO: Make this collapsable
             if let notes = exercise.notes {
@@ -64,4 +72,13 @@ struct SetView: View {
     }
     
     return Preview().environment(\.managedObjectContext, Store.preview.persistanceContainer.viewContext)
+}
+
+struct SetPage: Identifiable {
+    let id = UUID()
+    let sets: [Set]
+    
+    init(sets: [Set]) {
+        self.sets = sets
+    }
 }
