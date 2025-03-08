@@ -15,18 +15,24 @@ struct ExerciseView: View {
     }
     
     var body: some View {
-        HStack {
-            VStack {
-                Text("Weight").padding([.bottom], 0)
-                Text("Reps").padding()
-            }.frame(alignment: .leading)
-            ScrollView([.horizontal]) {
-                HStack {
-                    ForEach(sets) { item in
-                        SetView(info: item)
+        VStack {
+            HStack {
+                VStack {
+                    Text("Weight").padding([.bottom], 0)
+                    Text("Reps").padding()
+                }.frame(alignment: .leading)
+                ScrollView([.horizontal]) {
+                    HStack {
+                        ForEach(sets) { item in
+                            SetView(info: item)
+                        }
                     }
-                }
-            }.defaultScrollAnchor(.trailing)
+                }.defaultScrollAnchor(.trailing)
+            }
+            // TODO: Make this collapsable
+            if let notes = exercise.notes {
+                Text(notes)
+            }
         }
     }
 }
@@ -43,4 +49,19 @@ struct SetView: View {
             Text(String(reps)).padding()
         }
     }
+}
+
+#Preview {
+    struct Preview: View {
+        @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.created_at, ascending: true)],
+            animation: .default)
+        private var exercises: FetchedResults<Exercise>
+        
+        var body: some View {
+            // This preview will crash when there are zero exercises
+            ExerciseView(exercise: exercises.first!)
+        }
+    }
+    
+    return Preview().environment(\.managedObjectContext, Store.preview.persistanceContainer.viewContext)
 }

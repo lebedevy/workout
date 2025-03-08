@@ -23,11 +23,9 @@ struct EditNote: View {
     
     var body: some View {
         VStack {
-            TextField("Exercise notes", text: $text)
-                .frame(maxHeight: .infinity)
+            TextEditor(text: $text)
                 .padding()
                 .border(.secondary)
-                .multilineTextAlignment(.center)
             HStack {
                 Button("Cancel", action: cancel)
                 Spacer()

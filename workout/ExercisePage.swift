@@ -1,5 +1,5 @@
 //
-//  ExerciseView.swift
+//  ExercisePage.swift
 //  workout
 //
 //  Created by Yury Lebedev on 2/18/25.
@@ -78,6 +78,7 @@ struct CurrentExercise: View {
                 })
             }, label: {
                 Image(systemName: "ellipsis")
+                    .padding()
             })
         }
         ExerciseView(exercise: exercise)
