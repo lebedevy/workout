@@ -62,6 +62,10 @@ struct Store {
     }()
 }
 
+let lorem = """
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nulla nulla, tincidunt eget aliquet non, ornare consectetur erat. Suspendisse nec sollicitudin orci, eget venenatis tortor. Sed ac imperdiet nisl. Vivamus hendrerit felis vitae euismod congue. Cras efficitur nec quam vel rhoncus. Nam orci sem, condimentum tempor odio quis, consectetur dignissim dui. Praesent cursus est at arcu lobortis, ac porttitor odio pulvinar. Praesent feugiat et felis in vulputate.
+"""
+
 func addTestData(viewContext: NSManagedObjectContext) {
     let arr = ["Bench", "Squat", "Bench", "Curls - supinated"]
     var types: Dictionary<String, ExerciseType> = [:]
@@ -72,11 +76,11 @@ func addTestData(viewContext: NSManagedObjectContext) {
      If you want to preview UI with an empty result set, you will have to add an entity arg as the first argument for fetchrequest (ex entity: Workout.entity())
      This will prevent application crashes, BUT it will now break proper updates to the fetchedresults when new entities are added
      */
-    for _ in 0..<1 {
+    for _ in 0..<2 {
         let workout = Workout(context: viewContext)
         workout.created_at = Date()
         
-        for _ in 0..<2 {
+        for _ in 0..<3 {
             // Test data where we know the array is not empty
             let item = arr.randomElement()!
             
@@ -104,9 +108,10 @@ func addTestData(viewContext: NSManagedObjectContext) {
             }
             
             // Set relationships
-            newItem.exercise_to_set = NSOrderedSet(array: sets)
+            newItem.sets = NSOrderedSet(array: sets)
             newItem.exercise_to_type = eType
             newItem.exercise_to_workout = workout
+            newItem.notes = lorem
         }
     }
 }

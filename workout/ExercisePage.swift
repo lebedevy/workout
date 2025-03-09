@@ -94,7 +94,7 @@ struct CurrentExercise: View {
         newSet.created_at = Date()
         newSet.weight = weight
         newSet.reps = reps
-        newSet.set_to_exercise = exercise
+        newSet.exercise = exercise
         
         do {
             try store.save()
