@@ -10,37 +10,39 @@ import SwiftUI
 struct ExerciseView: View {
     @ObservedObject var exercise: Exercise
     
-    var sets: [SetPage] {
-        let arr = exercise.exercise_to_set?.array as? [Set] ?? []
-        let step = 4
-        return stride(from: 0, to: arr.count, by: step).map {
-            SetPage(sets: Array(arr[$0..<min($0 + step, arr.count)]))
-        }
-    }
-    
     var body: some View {
         VStack {
-            HStack {
-                VStack {
-                    Text("Weight").padding([.bottom], 0)
-                    Text("Reps").padding()
-                }.frame(alignment: .leading)
-                TabView {
-                    ForEach(sets) { page in
-                        HStack {
-                            ForEach(page.sets) { item in
-                                SetView(info: item)
-                            }
-                        }
-                    }
-                }
-                .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: sets.count > 1 ? .always : .never))
-            }
+            ExerciseSets(exercise: exercise)
             // TODO: Make this collapsable
             if let notes = exercise.notes {
                 Text(notes)
             }
+        }
+    }
+}
+
+struct ExerciseSets: View {
+    @ObservedObject var exercise: Exercise
+    
+    var sets: [Set] {
+        exercise.sets?.array as? [Set] ?? []
+    }
+    
+    var body: some View {
+        HStack {
+            Text("Weight")
+            Spacer()
+            Text("Reps")
+        }.bold()
+        ForEach(sets) { item in
+            HStack {
+                Text(String(item.weight))
+                Spacer()
+                Text(String(item.reps))
+            }
+            .swipeActions(allowsFullSwipe: false) {
+                Button("Delete", action: {})
+            }.tint(.red)
         }
     }
 }

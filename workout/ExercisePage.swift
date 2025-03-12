@@ -35,7 +35,7 @@ struct ExercisePage: View {
         VStack {
             ScrollView {
                 ForEach(items) { ex in
-                    VStack {
+                    Section {
                         if let date = ex.created_at {
                             Text(formatter.string(from: date))
                         }
@@ -81,8 +81,10 @@ struct CurrentExercise: View {
                     .padding()
             })
         }
-        ExerciseView(exercise: exercise)
-            .padding()
+        ScrollView {
+            ExerciseView(exercise: exercise)
+                .padding()
+        }
         SetInput(add: addSet)
             .sheet(isPresented: $isAddingNote, content: {
                 EditNote(exercise: exercise, open: $isAddingNote)
